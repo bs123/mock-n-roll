@@ -38,13 +38,13 @@ var mockedRoute = (req, res, next) => {
         res.statusCode = mocked[req.params.call].httpStatus;
         res.send(mocked[req.params.call].mockResponse);
     }
-}
+};
 
 // https.createServer(server).listen(port);
 // https.createServer(options,server).listen(port);
 
 server.listen(port, () => {
-    console.log('Server running on port ' + port + ' ...');
+    console.log('Mock\'n\'Roll running on port ' + port + ' ...');
 });
 
 server.use(vhost('yourFunny.domain.de', api));
