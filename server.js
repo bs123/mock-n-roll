@@ -70,6 +70,31 @@ api.use(connectRoute((router) => {
             mockedRoute(req, res, next);
             next();
         });
+        router.put(baseUrl + '/*/:call/', (req, res, next) => {
+            mockedRoute(req, res, next);
+            next();
+        });
+        router.put(baseUrl + '/:call/', (req, res, next) => {
+            mockedRoute(req, res, next);
+            next();
+        });
+        router.delete(baseUrl + '/*/:call/', (req, res, next) => {
+            mockedRoute(req, res, next);
+            next();
+        });
+        router.delete(baseUrl + '/:call/', (req, res, next) => {
+            mockedRoute(req, res, next);
+            next();
+        });
+        router.patch(baseUrl + '/*/:call/', (req, res, next) => {
+            mockedRoute(req, res, next);
+            next();
+        });
+        router.patch(baseUrl + '/:call/', (req, res, next) => {
+            mockedRoute(req, res, next);
+            next();
+        });
+        // HEAD?
 
         api.use(bodyParser.json());
 
@@ -90,9 +115,6 @@ api.use(connectRoute((router) => {
         });
 
         router.get(baseUrl + '/info/environmentdata', (req, res, next) => {
-            //if (typeof mocked['trainenvironmentdata'] != 'undefined') {
-            //        mockedRoute(req, res, next);
-            //}
             res.statusCode = 200;
             res.send(
                 {
@@ -104,5 +126,4 @@ api.use(connectRoute((router) => {
             );
             next();
         });
-
 }));
