@@ -45,6 +45,7 @@ var mockedRoute = (req, res, next) => {
 
 server.listen(port, () => {
     console.log('Mock\'n\'Roll running on port ' + port + ' ...');
+    console.log(process.argv);
 });
 
 server.use(vhost('yourFunny.domain.de', api));

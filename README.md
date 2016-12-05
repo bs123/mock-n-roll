@@ -5,10 +5,9 @@ git commit -a  --author="bs <email>" -m "readme"
 
 TODO:
 get rid of connect-*
-cross-env or cli
+cross-env or cli or node standard: http://stackoverflow.com/questions/4351521/how-do-i-pass-command-line-arguments-to-node-js
 author
 default overrule pathes (feature)
-PUT,DELETE,PATCH,OPTIONS? (feature)
 SwaggerDoc
 
 curl example
