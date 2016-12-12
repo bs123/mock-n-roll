@@ -1,16 +1,34 @@
+<img src="http://openclipart.org/download/28383/Dug-Rock-On.svg" width="10%" height="10%">
+
 # mock-n-roll
-configurable rest service system mock
+>configurable rest service system mock
 
-git commit -a  --author="bs <email>" -m "readme"
+## Demo
 
-TODO:
-get rid of connect-*
-cross-env or cli or node standard: http://stackoverflow.com/questions/4351521/how-do-i-pass-command-line-arguments-to-node-js
-author
-default overrule pathes (feature)
-SwaggerDoc
 
-curl example
+``` bash
+$ git commit -a  --author="bs <email>" -m "readme"
+```
+
+### mock-n-roll.config.js
+```javascript
+module.exports = {
+    vHost: 'my.funny.domain.dev',
+    baseUrl: '/api/v1',
+    port: 1234
+}
+```
+
+### TODO
+- [ ] get rid of connect-*
+- [ ] cross-env or cli or node standard: http://stackoverflow.com/questions/4351521/how-do-i-pass-command-line-arguments-to-node-js
+- [ ] author
+- [ ] default overrule pathes (feature)
+- [ ] SwaggerDoc
+- [ ] licence
+- [ ] mxd-eslint
+
+### curl example
 e.g.
 http://localhost:3081/mock/configure/tainenvironment/423
 
@@ -26,3 +44,7 @@ user-agent: ci
                     "ssd": {},
                     "connection": {"wifiStatus": "OK", "radioStatus": "HIGH"}
                 }
+
+### used/liked
+                *  express
+                *  (https://github.com/icholy/ttygif)
