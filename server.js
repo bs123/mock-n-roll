@@ -10,8 +10,9 @@ const _ = require('lodash');
 
 const server = express();
 const api = express();
-const port = 3081;
-const baseUrl = '/api/v1';
+const vhost =  config.hostname || 'yourFunny.domain.de';
+const port =  config.port || 3081;
+const baseUrl = config.baseUrl || '/api/v1';
 
 var mocked = {};
 
@@ -48,7 +49,7 @@ server.listen(port, () => {
     console.log(process.argv);
 });
 
-server.use(vhost('yourFunny.domain.de', api));
+server.use(vhost(vhost, api));
 server.use(vhost('localhost', api));
 api.use(cors());
 // api.use(error);
