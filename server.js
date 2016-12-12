@@ -1,4 +1,5 @@
 // const fs = require('fs');
+const config = 'tbd_commandconfig';
 const express = require('express');
 const cors = require('cors');
 const vhost = require('vhost');
@@ -10,8 +11,8 @@ const _ = require('lodash');
 
 const server = express();
 const api = express();
-const vhost =  config.hostname || 'yourFunny.domain.de';
-const port =  config.port || 3081;
+const vhostname = config.hostname || 'yourFunny.domain.de';
+const port = config.port || 3081;
 const baseUrl = config.baseUrl || '/api/v1';
 
 var mocked = {};
@@ -49,13 +50,12 @@ server.listen(port, () => {
     console.log(process.argv);
 });
 
-server.use(vhost(vhost, api));
+server.use(vhost(vhostname, api));
 server.use(vhost('localhost', api));
 api.use(cors());
 // api.use(error);
 // api.use(send);
 api.use(connectRoute((router) => {
-
         router.get(baseUrl + '/*/:call/', (req, res, next) => {
             mockedRoute(req, res, next);
             next();
@@ -100,18 +100,18 @@ api.use(connectRoute((router) => {
 
         api.use(bodyParser.json());
 
-        router.post('/mock/configure/:call/:httpStatus',  (req, res, next) => {
+        router.post('/mock/configure/:call/:httpStatus', (req, res, next) => {
             var mockedCallName = req.params.call;
             var mockedStatusCode = req.params.httpStatus;
             var curCall = { [mockedCallName]: {
-             httpStatus: mockedStatusCode, mockResponse: req.body}};
+             httpStatus: mockedStatusCode, mockResponse: req.body } };
             // http://stackoverflow.com/questions/19965844/lodash-difference-between-extend-assign-and-merge
             mocked = _.extend(
                 mocked,
                 { [mockedCallName]: {
-                    httpStatus: mockedStatusCode, mockResponse: req.body}});
+                    httpStatus: mockedStatusCode, mockResponse: req.body } });
             res.statusCode = 200;
-            res.send( mocked );
+            res.send(mocked);
 
             next();
         });

@@ -2,9 +2,11 @@
     "extends": "maxdome",
     "rules": {
         "no-console": 0,
+        "prefer-template": 0,
         "no-var": 1,
         "no-unused-vars": 1,
         "indent": 1,
+        "no-param-reassign": 1,
         "semi": 2
     }
 }
