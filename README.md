@@ -4,16 +4,13 @@
 >configurable rest service system mock
 
 ## Demo
+todo
 
-
-``` bash
-$ git commit -a  --author="bs <email>" -m "readme"
-```
 
 ### mock-n-roll.config.js
 ```javascript
 module.exports = {
-    vHost: 'my.funny.domain.dev',
+    vHost: 'your.funny.domain.dev',
     baseUrl: '/api/v1',
     port: 1234,
     mockedMethods = [
@@ -37,10 +34,13 @@ module.exports = {
 - [ ] mxd-eslint
 
 ### upcoming features
-proxy recording
+- [ ] proxy recording mode
 
 ### curl example
 #### before / setUp
+> you could specify any repsonse body in the post body
+> you cold specify any service call as path parameter, here environment, /mock/configure/**environment**/200
+> you cold specify any response http code as path parameter, here 200, /mock/configure/environment/**200**
 ``` bash
 echo '{
     "location": {"longitude": 89.582, "latitude": 99.1351},
@@ -48,7 +48,7 @@ echo '{
     "ssd": {},
     "connection": {"wifiStatus": "OK", "radioStatus": "HIGH"}
       }
-' | curl -X POST --header "Content-Type:application/json" -d @- http://localhost:3081/mock/configure/environment/200
+' | curl -X POST -d @- http://localhost:3081/mock/configure/environment/200 --header "Content-Type:application/json"
 ```
 
 #### test / action that triggers the call
@@ -64,3 +64,7 @@ curl -X DELETE http://localhost:3081/mock/configure
 ### used/liked
                 *  express
                 *  (https://github.com/icholy/ttygif)
+
+                ``` bash
+                $ git commit -a  --author="bs <email>" -m "readme"
+                ```
