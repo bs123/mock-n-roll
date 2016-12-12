@@ -4,9 +4,9 @@
 configurable rest service system mock
 
 ## Motivation
-* you don't need mock-n-roll for mocking in your Unittest, use [Sinion](http://sinonjs.org/)
-* you don't need mock-n-roll for Mocking Http Calls, use network intersections like [nock](https://github.com/node-nock/nock)
-* when doing blackbox testing of your client, you may want to use mock-n-roll.
+* you don't need mock-n-roll for mocking service layers in your unit tests, use [Sinion](http://sinonjs.org/)
+* you don't need mock-n-roll for mocking http requests in your integration tests, use network interceptors - [nock](https://github.com/node-nock/nock) is cool
+* when doing blackbox testing of your client side code, you may want to use mock-n-roll.
 
 ## Demo
 >todo
@@ -36,6 +36,12 @@ curl http://localhost:3081/api/v1/environment
 ``` bash
 curl -X DELETE http://localhost:3081/mock/configure
 ```
+
+### code example
+#### before
+todo mocha before
+#### test
+#### after
 
 ### mock-n-roll.config.js
 ```javascript
@@ -75,7 +81,6 @@ module.exports = {
 ``` bash
  $ git commit -a  --author="bs <email>" -m "readme"
 ```
-
 
 License
 -------
