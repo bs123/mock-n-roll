@@ -1,11 +1,11 @@
-//const fs = require('fs');
+// const fs = require('fs');
 const express = require('express');
 const cors = require('cors');
 const vhost = require('vhost');
 const connectRoute = require('connect-route');
-//const send = require('connect-send-json').json();
+// const send = require('connect-send-json').json();
 const bodyParser = require('body-parser');
-//const error = require('connect-send-error').error();
+// const error = require('connect-send-error').error();
 const _ = require('lodash');
 
 const server = express();
@@ -13,28 +13,28 @@ const api = express();
 const port = 3081;
 const baseUrl = '/api/v1';
 
-var   mocked = {};
+var mocked = {};
 
-//http://underscorejs.org/#extend
+// http://underscorejs.org/#extend
 //    var result={};
-//Object.keys(obj1).forEach((key) => result[key] = obj1[key]);
-//Object.keys(obj2).forEach((key) => result[key] = obj2[key]);
+// Object.keys(obj1).forEach((key) => result[key] = obj1[key]);
+// Object.keys(obj2).forEach((key) => result[key] = obj2[key]);
 
-//method({
+// method({
 //    ...object1,
 //    ...object2
-//})
+// })
 
-//const https = require('https');
+// const https = require('https');
 
-//const options = {
+// const options = {
 //    key:    fs.readFileSync('ssl/key.pem'),
 //    cert:   fs.readFileSync('ssl/cert.pem'),
-//ca:     fs.readFileSync('ssl/ca.crt')
-//};
+// ca:     fs.readFileSync('ssl/ca.crt')
+// };
 
 var mockedRoute = (req, res, next) => {
-    if (typeof mocked[req.params.call] != 'undefined') {
+    if (typeof mocked[req.params.call] !== 'undefined') {
         res.statusCode = mocked[req.params.call].httpStatus;
         res.send(mocked[req.params.call].mockResponse);
     }
@@ -52,7 +52,7 @@ server.use(vhost('yourFunny.domain.de', api));
 server.use(vhost('localhost', api));
 api.use(cors());
 // api.use(error);
-//api.use(send);
+// api.use(send);
 api.use(connectRoute((router) => {
 
         router.get(baseUrl + '/*/:call/', (req, res, next) => {
@@ -104,7 +104,7 @@ api.use(connectRoute((router) => {
             var mockedStatusCode = req.params.httpStatus;
             var curCall = { [mockedCallName]: {
              httpStatus: mockedStatusCode, mockResponse: req.body}};
-            //http://stackoverflow.com/questions/19965844/lodash-difference-between-extend-assign-and-merge
+            // http://stackoverflow.com/questions/19965844/lodash-difference-between-extend-assign-and-merge
             mocked = _.extend(
                 mocked,
                 { [mockedCallName]: {

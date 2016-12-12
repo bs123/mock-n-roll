@@ -1,12 +1,10 @@
 {
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "jsx": true
-        }
-    },
+    "extends": "maxdome",
     "rules": {
+        "no-console": 0,
+        "no-var": 1,
+        "no-unused-vars": 1,
+        "indent": 1,
         "semi": 2
     }
 }
