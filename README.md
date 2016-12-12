@@ -9,7 +9,7 @@ configurable rest service system mock
 * when doing blackbox testing of your client side code, you may want to use mock-n-roll.
 
 ## Demo
-![gif](./doc/ttyDemo.gif)
+![gif](./doc/ttyDemo2nd.gif)
 
 ### curl example
 #### before / setUp
