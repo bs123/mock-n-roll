@@ -115,16 +115,10 @@ api.use(connectRoute((router) => {
             next();
         });
 
-        router.get(baseUrl + '/info/environmentdata', (req, res, next) => {
+        router.delete('/mock/configure', (req, res, next) => {
+            mocked = {};
             res.statusCode = 200;
-            res.send(
-                {
-                    "location": {"longitude": 11.582, "latitude": 48.1351},
-                    "zipId": "00000135",
-                    "ssd": {},
-                    "connection": {"wifiStatus": "OK", "radioStatus": "HIGH"}
-                }
-            );
+            res.send();
             next();
         });
 }));

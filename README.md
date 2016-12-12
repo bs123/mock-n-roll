@@ -15,7 +15,15 @@ $ git commit -a  --author="bs <email>" -m "readme"
 module.exports = {
     vHost: 'my.funny.domain.dev',
     baseUrl: '/api/v1',
-    port: 1234
+    port: 1234,
+    mockedMethods = [
+        'get',
+        'post',
+        'put',
+        'patch',
+        'delete',
+        // 'head'
+    ]
 }
 ```
 
@@ -28,22 +36,30 @@ module.exports = {
 - [ ] licence
 - [ ] mxd-eslint
 
+### upcoming features
+proxy recording
+
 ### curl example
-e.g.
-http://localhost:3081/mock/configure/tainenvironment/423
+#### before / setUp
+``` bash
+echo '{
+    "location": {"longitude": 89.582, "latitude": 99.1351},
+    "zipId": "19900135",
+    "ssd": {},
+    "connection": {"wifiStatus": "OK", "radioStatus": "HIGH"}
+      }
+' | curl -X POST --header "Content-Type:application/json" -d @- http://localhost:3081/mock/configure/environment/200
+```
 
-accept: application/json
-accept-encoding: gzip, deflate
-accept-language: en-US,en;q=0.8
-content-type: application/json
-user-agent: ci
+#### test / action that triggers the call
+``` bash
+curl http://localhost:3081/api/v1/environment
+```
 
-  				{
-                    "location": {"longitude": 79.582, "latitude": 99.1351},
-                    "zipId": "11000135",
-                    "ssd": {},
-                    "connection": {"wifiStatus": "OK", "radioStatus": "HIGH"}
-                }
+#### after / tearDown
+``` bash
+curl -X DELETE http://localhost:3081/mock/configure
+```
 
 ### used/liked
                 *  express
