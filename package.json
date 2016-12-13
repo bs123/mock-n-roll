@@ -4,7 +4,7 @@
   "description": "configurable rest service system mock",
   "main": "server.js --port NUMBER --baseUrl BASEURL",
   "scripts": {
-    "lint:src": "eslint . --max-warnings 62",
+    "lint:src": "eslint . --max-warnings 5 ",
     "lint:test": "eslint test --ext .js --ignore-pattern coverage_report --max-warnings 1",
     "nodemon": "nodemon server.js --port NUMBER --baseUrl BASEURL",
     "prepush": "npm run lint:src && npm run lint:test",

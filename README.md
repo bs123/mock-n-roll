@@ -65,7 +65,7 @@ module.exports = {
 - [x] cross-env or cli or node standard
 - [x] author
 - [ ] lib usage
-- [ ] eslint autofix
+- [x] eslint autofix
 - [ ] SwaggerDoc
 - [x] licence
 - [x] mxd-eslint
