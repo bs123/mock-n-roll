@@ -1,10 +1,10 @@
 {
   "name": "mock-n-roll",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "configurable rest service system mock",
   "main": "server.js --port NUMBER --baseUrl BASEURL",
   "scripts": {
-    "lint:src": "eslint . --max-warnings 62",
+    "lint:src": "eslint . --max-warnings 7",
     "lint:test": "eslint test --ext .js --ignore-pattern coverage_report --max-warnings 1",
     "nodemon": "nodemon server.js --port NUMBER --baseUrl BASEURL",
     "prepush": "npm run lint:src && npm run lint:test",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bs123/mock-n-roll.git"
+    "url": "git+https://github.com/maxdome/mock-n-roll.git"
   },
   "keywords": [
     "express",
@@ -21,12 +21,12 @@
     "rest",
     "configurable"
   ],
-  "author": "tbd",
+  "author": "maxdome GmbH",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/bs123/mock-n-roll/issues"
+    "url": "https://github.com/maxdome/mock-n-roll/issues"
   },
-  "homepage": "https://github.com/bs123/mock-n-roll#readme",
+  "homepage": "https://github.com/maxdome/mock-n-roll#readme",
   "dependencies": {
     "body-parser": "1.15.2",
     "connect-route": "0.1.5",
