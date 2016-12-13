@@ -63,7 +63,9 @@ module.exports = {
 ### TODO
 - [ ] get rid of connect-*
 - [x] cross-env or cli or node standard
-- [ ] author
+- [x] author
+- [ ] lib usage
+- [ ] eslint autofix
 - [ ] SwaggerDoc
 - [x] licence
 - [x] mxd-eslint
@@ -74,9 +76,10 @@ module.exports = {
 - [ ] [ngrok](https://ngrok.com/)
 
 ### used/liked
-                *  express
-                *  (https://github.com/icholy/ttygif)
-                *  https://github.com/swagger-api/swagger-js
+                * express
+                * https://github.com/icholy/ttygif
+                * https://github.com/swagger-api/swagger-js
+                * https://jbt.github.io/markdown-editor
 
 ``` bash
  $ git commit -a  --author="bs <email>" -m "readme"
