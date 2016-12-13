@@ -1,10 +1,10 @@
 {
   "name": "mock-n-roll",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "configurable rest service system mock",
   "main": "server.js --port NUMBER --baseUrl BASEURL",
   "scripts": {
-    "lint:src": "eslint . --max-warnings 5 ",
+    "lint:src": "eslint . --max-warnings 7",
     "lint:test": "eslint test --ext .js --ignore-pattern coverage_report --max-warnings 1",
     "nodemon": "nodemon server.js --port NUMBER --baseUrl BASEURL",
     "prepush": "npm run lint:src && npm run lint:test",

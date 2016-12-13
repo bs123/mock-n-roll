@@ -3,6 +3,7 @@
     "rules": {
         "no-console": 0,
         "prefer-template": 0,
+        "strict": 1,
         "no-var": 1,
         "no-unused-vars": 1,
         "indent": 1,
