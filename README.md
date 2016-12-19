@@ -14,8 +14,8 @@ configurable rest service system mock
 ### curl example
 #### before / setUp
 * you could specify any repsonse body in the post body
-* you cold specify any service call as path parameter, here environment, /mock/configure/**environment**/200
-* you cold specify any response http code as path parameter, here 200, /mock/configure/environment/**200**
+* you could specify any service call as path parameter, here environment, /mock/configure/**environment**/200
+* you could specify any response http code as path parameter, here 200, /mock/configure/environment/**200**
 
 ``` bash
 echo '{
@@ -44,11 +44,13 @@ for https://www.npmjs.com/package/request and mocha
 
 ```javascript
  before((client, done) => {
-        request.post('http://localhost:3081/mock/configure/environment/200').json({"location": {"longitude": 89.582, "latitude": 99.1351},
-                                                                                      "zipId": "19900135",
-                                                                                      "ssd": {},
-                                                                                      "connection": {"wifiStatus": "OK", "radioStatus": "HIGH"}
-                                                                                   });
+        request
+            .post('http://localhost:3081/mock/configure/environment/200')
+            .json({"location": {"longitude": 89.582, "latitude": 99.1351},
+                   "zipId": "19900135",
+                   "ssd": {},
+                   "connection": {"wifiStatus": "OK", "radioStatus": "HIGH"}
+                  });
         ...
         done();
  });
@@ -60,7 +62,8 @@ execute your IT-Test
 #### after
 ```javascript
     after((client, done) => {
-        request.delete('http://localhost:3081/mock/configure');
+        request
+            .delete('http://localhost:3081/mock/configure');
         client.end(() => {
             done();
         });
