@@ -38,10 +38,34 @@ curl -X DELETE http://localhost:3081/mock/configure
 ```
 
 ### code example
+for https://www.npmjs.com/package/request and mocha
+
 #### before
-todo mocha before
+
+```javascript
+ before((client, done) => {
+        request.post('http://localhost:3081/mock/configure/environment/200').json({"location": {"longitude": 89.582, "latitude": 99.1351},
+                                                                                      "zipId": "19900135",
+                                                                                      "ssd": {},
+                                                                                      "connection": {"wifiStatus": "OK", "radioStatus": "HIGH"}
+                                                                                   });
+        ...
+        done();
+ });
+```
+
 #### test
+execute your IT-Test
+
 #### after
+```javascript
+    after((client, done) => {
+        request.delete('http://localhost:3081/mock/configure');
+        client.end(() => {
+            done();
+        });
+    });
+```
 
 ### mock-n-roll.config.js
 ```javascript
@@ -63,12 +87,18 @@ module.exports = {
 ### TODO
 - [ ] get rid of connect-*
 - [x] cross-env or cli or node standard
+- [ ] config
 - [x] author
 - [ ] lib usage
 - [x] eslint autofix
 - [ ] SwaggerDoc
 - [x] licence
 - [x] mxd-eslint
+- [ ] provide readme on GET /
+- [ ] delay on request level
+- [ ] networkerrors on request level
+- [ ] example for mocha test
+
 
 ### upcoming features
 - [ ] default overrule pathes (feature)
