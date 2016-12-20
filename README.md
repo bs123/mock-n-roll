@@ -13,7 +13,7 @@ configurable rest service system mock
 
 ### curl example
 #### before / setUp
-* you could specify any repsonse body in the post body
+* you could specify any response body in the post body
 * you could specify any service call as path parameter, here environment, /mock/configure/**environment**/200
 * you could specify any response http code as path parameter, here 200, /mock/configure/environment/**200**
 
@@ -101,6 +101,7 @@ module.exports = {
 - [ ] delay on request level
 - [ ] networkerrors on request level
 - [ ] example for mocha test
+- [ ] npmjs.com - try it in your browser
 
 
 ### upcoming features

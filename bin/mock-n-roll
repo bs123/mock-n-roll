@@ -1,0 +1,10 @@
+#! /usr/bin/env node
+console.log("console.log output")
+var MockNRoll = require('../server.js');
+
+try {
+    MockNRoll;
+} catch (ex) {
+    console.log("console.log noop")
+    process.exit(2);
+}
