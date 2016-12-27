@@ -10,6 +10,9 @@
     "prepush": "npm run lint:src && npm run lint:test",
     "test": "test"
   },
+  "bin": {
+    "mock-n-roll": "./bin/mock-n-roll"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/maxdome/mock-n-roll.git"
@@ -29,10 +32,13 @@
   "homepage": "https://github.com/maxdome/mock-n-roll#readme",
   "dependencies": {
     "body-parser": "1.15.2",
+    "commander": "2.9.0",
     "connect-route": "0.1.5",
     "cors": "2.8.1",
     "express": "4.14.0",
+    "http-proxy-middleware": "0.17.3",
     "lodash": "4.17.2",
+    "prettyjson": "^1.2.1",
     "vhost": "3.0.2"
   },
   "devDependencies": {

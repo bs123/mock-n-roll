@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+const program = require('commander');
+const prettyjson = require('prettyjson');
+const path = require('path');
+const MocknRoll = require('../index.js');
+
+program
+  .description('mock-n-roll')
+  .option('-c, --config [path]', 'configuration file for mock-n-roll')
+  .parse(process.argv);
+
+const configPath = program.config || path.join(process.cwd(), '/mock-n-roll.conf.js');
+const config = require(configPath);
+
+MocknRoll(config)
+  .then(() => {
+    console.log('Mock-n-roll started with configuration:');
+    console.log(prettyjson.render(config));
+  })
+  .catch((err) => {
+    console.error(err.stack);
+  });
