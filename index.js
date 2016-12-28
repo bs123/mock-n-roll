@@ -18,15 +18,15 @@ function MocknRoll(config) {
   const proxyTarget = config.target;
   const options = config.options || {};
 
-  function shouldBeProxied(pathname) {
-    const startsWithPrefix = pathname.match(`^${prefix}`);
-    const mocked = !!mocks[pathname];
+  function shouldBeProxied(path) {
+    const startsWithPrefix = path.match(`^${prefix}`);
+    const mocked = !!mocks[path];
     return startsWithPrefix && !mocked;
   }
 
   function addMock(mock) {
     mocks = _.extend(mocks, {
-      [prefix + mock.url]: {
+      [prefix + mock.path]: {
         code: mock.code, body: mock.body
       }
     });
