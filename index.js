@@ -12,7 +12,6 @@ function MocknRoll(config) {
 
   const app = express();
 
-  const vhostname = config.vhostname || 'localhost';
   const httpPort = config.httpPort || 8080;
   const httpsPort = config.httpsPort || 8443;
   const prefix = config.prefix || ''; // do we need this? what if we want to mock another route?
@@ -78,15 +77,19 @@ function MocknRoll(config) {
     });
   }
 
+  function start() {
+    http.createServer(app).listen(httpPort);
+    if (options.key && options.cert) {
+      https.createServer(options, app).listen(httpsPort);
+    }
+  }
+
   return new Promise((resolve, reject) => {
     setup();
     try {
-      http.createServer(app).listen(httpPort);
-      if (options.key && options.cert) {
-        https.createServer(options, app).listen(httpsPort);
-      }
+      start();
     } catch (err) {
-      reject(err);
+      return reject(err);
     }
     return resolve();
   });
