@@ -42,13 +42,6 @@ function MocknRoll(config) {
       throw new Error('Proxy target should be specified!');
     }
 
-    // todo need to add virtual hosts?
-    app.use(prefix, proxy(shouldBeProxied, {
-      target: proxyTarget,
-      changeOrigin: true,
-      logLevel: 'warn'
-    }));
-
     app.use(bodyParser.json());
 
     app.post('/mocks', (req, res) => {
@@ -65,6 +58,13 @@ function MocknRoll(config) {
       clearMocks();
       res.status(204).send();
     });
+
+    // todo need to add virtual hosts?
+    app.use(prefix, proxy(shouldBeProxied, {
+      target: proxyTarget,
+      changeOrigin: true,
+      logLevel: 'warn'
+    }));
 
     app.all('*', (req, res) => {
       const path = req.params[0];
