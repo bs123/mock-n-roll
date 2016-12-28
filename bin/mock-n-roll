@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 const program = require('commander');
-const prettyjson = require('prettyjson');
 const path = require('path');
 const MocknRoll = require('../index.js');
 
@@ -14,8 +13,11 @@ const config = require(configPath);
 
 MocknRoll(config)
   .then(() => {
-    console.log('Mock-n-roll started with configuration:');
-    console.log(prettyjson.render(config));
+    console.log('Mock-n-Roll started...');
+    console.log(`HTTP  : ${config.httpPort}`);
+    console.log(`HTTPS : ${config.httpsPort}`);
+    console.log(`Target: ${config.target}`);
+    console.log(`Prefix: ${config.prefix ? config.prefix : '[none]'}`);
   })
   .catch((err) => {
     console.error(err.stack);

@@ -38,7 +38,6 @@
     "express": "4.14.0",
     "http-proxy-middleware": "0.17.3",
     "lodash": "4.17.2",
-    "prettyjson": "^1.2.1",
     "vhost": "3.0.2"
   },
   "devDependencies": {
