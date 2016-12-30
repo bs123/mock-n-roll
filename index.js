@@ -6,6 +6,7 @@ const express = require('express');
 const proxy = require('http-proxy-middleware');
 const bodyParser = require('body-parser');
 const _ = require('lodash');
+const cors = require('cors');
 
 function MocknRoll(config) {
   let mocks = {};
@@ -25,6 +26,7 @@ function MocknRoll(config) {
   }
 
   function addMock(mock) {
+    console.log(`Added mock to path: ${mock.path}`);
     mocks = _.extend(mocks, {
       [prefix + mock.path]: {
         code: mock.code, body: mock.body
@@ -33,6 +35,7 @@ function MocknRoll(config) {
   }
 
   function clearMocks() {
+    console.log('Cleared all mocks');
     mocks = {};
   }
 
@@ -41,7 +44,12 @@ function MocknRoll(config) {
       throw new Error('Proxy target should be specified!');
     }
 
-    app.use(bodyParser.json());
+    app.use(cors()); // cors uses for avoiding cross origin issues
+
+    // paths for configuring mocks on our proxy
+    // body parser defined not on "/" because of https://github.com/chimurai/http-proxy-middleware/issues/40
+    // proxy middleware has own bodyParser
+    app.use('/mocks', bodyParser.json());
 
     app.post('/mocks', (req, res) => {
       const mock = req.body;
@@ -58,13 +66,17 @@ function MocknRoll(config) {
       res.status(204).send();
     });
 
-    // todo need to add virtual hosts?
+    // our proxy
     app.use(prefix, proxy(shouldBeProxied, {
       target: proxyTarget,
       changeOrigin: true,
-      logLevel: 'warn'
+      logLevel: 'debug',
+      onError: (err, req, res) => {
+        console.log('ERROR:' + err);
+      }
     }));
 
+    // our mocks
     app.all('*', (req, res) => {
       const path = req.params[0];
       const mock = mocks[path];
