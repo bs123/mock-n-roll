@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const program = require('commander');
 const path = require('path');
-const MocknRoll = require('../index.js');
+const MocknRoll = require('../index').server;
 
 program
   .description('mock-n-roll')
