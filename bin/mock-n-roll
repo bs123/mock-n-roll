@@ -2,7 +2,7 @@
 const MocknRoll = require('../index').server;
 const config = require('../lib/cli').config;
 
-MocknRoll(config)
+new MocknRoll(config).start()
   .then(() => {
     console.log('Mock-n-Roll started...');
     console.log(`HTTP  : ${config.httpPort}`);
