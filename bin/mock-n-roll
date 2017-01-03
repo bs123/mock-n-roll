@@ -1,15 +1,6 @@
 #!/usr/bin/env node
-const program = require('commander');
-const path = require('path');
 const MocknRoll = require('../index').server;
-
-program
-  .description('mock-n-roll')
-  .option('-c, --config [path]', 'configuration file for mock-n-roll')
-  .parse(process.argv);
-
-const configPath = program.config || path.join(process.cwd(), '/mock-n-roll.conf.js');
-const config = require(configPath);
+const config = require('../lib/cli').config;
 
 MocknRoll(config)
   .then(() => {
