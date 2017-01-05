@@ -38,6 +38,7 @@
     "express": "4.14.0",
     "http-proxy-middleware": "0.17.3",
     "lodash": "4.17.2",
+    "request": "2.79.0",
     "vhost": "3.0.2"
   },
   "devDependencies": {
