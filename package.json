@@ -8,7 +8,7 @@
     "lint:test": "eslint test --ext .js --ignore-pattern coverage_report --max-warnings 1",
     "nodemon": "nodemon server.js --port NUMBER --baseUrl BASEURL",
     "prepush": "npm run lint:src && npm run lint:test",
-    "test": "test"
+    "test": "mocha"
   },
   "bin": {
     "mock-n-roll": "./bin/mock-n-roll"
@@ -49,6 +49,8 @@
     "eslint-plugin-jsx-a11y": "2.2.3",
     "eslint-plugin-react": "6.8.0",
     "husky": "0.11.9",
+    "mocha": "3.2.0",
+    "nock": "9.0.2",
     "nodemon": "1.11.0"
   }
 }
