@@ -1,8 +1,8 @@
 {
   "name": "mock-n-roll",
   "version": "0.1.0",
-  "description": "configurable rest service system mock",
-  "main": "server.js --port NUMBER --baseUrl BASEURL",
+  "description": "Configurable server for proxing and mocking REST",
+  "main": "index.js",
   "scripts": {
     "lint:src": "eslint . --max-warnings 7",
     "lint:test": "eslint test --ext .js --ignore-pattern coverage_report --max-warnings 1",
@@ -32,14 +32,12 @@
   "homepage": "https://github.com/maxdome/mock-n-roll#readme",
   "dependencies": {
     "body-parser": "1.15.2",
-    "commander": "2.9.0",
-    "connect-route": "0.1.5",
+    "commander": "2.9.0",    
     "cors": "2.8.1",
     "express": "4.14.0",
     "http-proxy-middleware": "0.17.3",
     "lodash": "4.17.2",
-    "request": "2.79.0",
-    "vhost": "3.0.2",
+    "request": "2.79.0",    
     "winston": "2.3.0"
   },
   "devDependencies": {
