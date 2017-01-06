@@ -1,15 +1,19 @@
 #!/usr/bin/env node
 const MocknRoll = require('../index').server;
-const config = require('../lib/cli').config;
+const cli = require('../lib/cli');
+const logger = require('winston');
+
+const config = cli.config;
+logger.level = cli.debug ? 'debug' : 'info';
 
 new MocknRoll(config).start()
   .then(() => {
-    console.log('Mock-n-Roll started...');
-    console.log(`HTTP  : ${config.httpPort}`);
-    console.log(`HTTPS : ${config.httpsPort}`);
-    console.log(`Target: ${config.target}`);
-    console.log(`Prefix: ${config.prefix ? config.prefix : '[none]'}`);
+    logger.info('Mock-n-Roll started...');
+    logger.info(`HTTP  : ${config.httpPort}`);
+    logger.info(`HTTPS : ${config.httpsPort}`);
+    logger.info(`Target: ${config.target}`);
+    logger.info(`Prefix: ${config.prefix ? config.prefix : '[none]'}`);
   })
   .catch((err) => {
-    console.error(err.stack);
+    logger.error(err.stack);
   });

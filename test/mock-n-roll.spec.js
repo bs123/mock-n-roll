@@ -84,7 +84,7 @@ describe('Mock-n-Roll', () => {
     });
   });
 
-  it('returns JSON object with all mocked routes', (done) => {
+  it('returns 200 and JSON object with all mocked routes', (done) => {
     const expectedBody = {
       '/posts/1': {
         body: {
