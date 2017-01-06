@@ -1,0 +1,7 @@
+{
+  "path": "/posts/1",
+  "code": 404,
+  "body": {
+    "msg": "Requested post wasn't found!"
+  }
+}

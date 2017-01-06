@@ -3,22 +3,14 @@
 'use strict';
 
 const index = require('../index');
-// const config = require('../example/mock-n-roll.conf');
 const assert = require('assert');
 const request = require('request');
 const nock = require('nock');
-const fs = require('fs');
-// const mocha = require('mocha');
 
 const MocknRoll = index.server;
 const MocknRollClient = index.client;
 
-// const postsMockedResponse = require('../example/mocks/posts/404.json');
-
-// const mockClient = new MocknRollClient({ host: 'localhost', port: 8080 });
-
 describe('Mock-n-Roll', () => {
-  let mockServer;
   let mockClient;
 
   const serverConfig = {
@@ -26,10 +18,7 @@ describe('Mock-n-Roll', () => {
     httpsPort: 8443,
     prefix: '',
     target: 'https://json-dummy.com',
-    options: {
-      key: fs.readFileSync(`${__dirname}/../example/example.com.key`, 'utf-8'),
-      cert: fs.readFileSync(`${__dirname}/../example/example.com.cert`, 'utf-8')
-    }
+    options: {}
   };
 
   const clientConfig = {
@@ -57,8 +46,7 @@ describe('Mock-n-Roll', () => {
       .get('/posts/1')
       .reply('200', postsOriginResponse);
 
-    mockServer = new MocknRoll(serverConfig);
-    mockServer.start()
+    new MocknRoll(serverConfig).start()
       .then(() => { })
       .catch((err) => {
         throw new Error(err);
