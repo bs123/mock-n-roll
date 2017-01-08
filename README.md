@@ -14,7 +14,7 @@ Configurable server for proxing and mocking REST.
 
 Below a short recorded demo, it should you give first impression about tool.
 
-<script type="text/javascript" src="https://asciinema.org/a/6f78jzqb7jq9t9qdrogxa5fog.js" id="asciicast-6f78jzqb7jq9t9qdrogxa5fog" async></script>
+[![asciicast](https://asciinema.org/a/6f78jzqb7jq9t9qdrogxa5fog.png)](https://asciinema.org/a/6f78jzqb7jq9t9qdrogxa5fog)
 
 ## Example
 
