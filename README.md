@@ -165,7 +165,6 @@ client.get((error, response, body) => {
 client.delete((error, response, body) => {
     // do something in callback
 });
-
 ```
 
 Also you could look at the tests, it should give you additional information how you could run and use mock-n-roll.

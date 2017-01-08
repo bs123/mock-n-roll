@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Configurable server for proxing and mocking REST",
   "main": "index.js",
+  "bin": "./bin/mock-n-roll",
   "scripts": {
     "lint:src": "eslint . --max-warnings 7",
     "lint:test": "eslint test --ext .js --ignore-pattern coverage_report --max-warnings 1",
@@ -24,7 +25,10 @@
     "rest",
     "configurable"
   ],
-  "author": "maxdome GmbH",
+  "author": {
+    "name": "maxdome GmbH",
+    "url": "https://www.maxdome.de/"
+  },
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/maxdome/mock-n-roll/issues"
