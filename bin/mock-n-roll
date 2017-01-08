@@ -1,10 +1,19 @@
-#! /usr/bin/env node
-console.log("console.log output")
-var MockNRoll = require('../server.js');
+#!/usr/bin/env node
+const MocknRoll = require('../index').server;
+const cli = require('../lib/cli');
+const logger = require('winston');
 
-try {
-    MockNRoll;
-} catch (ex) {
-    console.log("console.log noop")
-    process.exit(2);
-}
+const config = cli.config;
+logger.level = cli.debug ? 'debug' : 'info';
+
+new MocknRoll(config).start()
+  .then(() => {
+    logger.info('Mock-n-Roll started...');
+    logger.info(`HTTP  : ${config.httpPort}`);
+    logger.info(`HTTPS : ${config.httpsPort}`);
+    logger.info(`Target: ${config.target}`);
+    logger.info(`Prefix: ${config.prefix ? config.prefix : '[none]'}`);
+  })
+  .catch((err) => {
+    logger.error(err.stack);
+  });

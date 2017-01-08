@@ -1,126 +1,175 @@
 <img src="http://openclipart.org/download/28383/Dug-Rock-On.svg" width="10%" height="10%">
 
 # mock-n-roll
-configurable rest service system mock
+
+Configurable server for proxing and mocking REST.
 
 ## Motivation
-* you don't need mock-n-roll for mocking service layers in your unit tests, use [Sinion](http://sinonjs.org/)
-* you don't need mock-n-roll for mocking http requests in your integration tests, use network interceptors - [nock](https://github.com/node-nock/nock) is cool
-* when doing blackbox testing of your client side code, you may want to use mock-n-roll.
+
+* You don't need mock-n-roll for mocking service layers in your unit tests, use [Sinion](http://sinonjs.org/).
+* You don't need mock-n-roll for mocking http requests in your integration tests, use network interceptors - [Nock](https://github.com/node-nock/nock) is cool.
+* When doing blackbox testing of your client side code, you may want to use `mock-n-roll`.
 
 ## Demo
-![gif](./doc/ttyDemo2nd.gif)
 
-### curl example
-#### before / setUp
-* you could specify any response body in the post body
-* you could specify any service call as path parameter, here environment, /mock/configure/**environment**/200
-* you could specify any response http code as path parameter, here 200, /mock/configure/environment/**200**
+Below a short recorded demo, it should you give first impression about tool.
 
-``` bash
-echo '{
-    "location": {"longitude": 89.582, "latitude": 99.1351},
-    "zipId": "19900135",
-    "ssd": {},
-    "connection": {"wifiStatus": "OK", "radioStatus": "HIGH"}
-      }
-' | curl -X POST -d @- http://localhost:3081/mock/configure/environment/200 --header "Content-Type:application/json"
+[![asciicast](https://asciinema.org/a/6f78jzqb7jq9t9qdrogxa5fog.png)](https://asciinema.org/a/6f78jzqb7jq9t9qdrogxa5fog)
+
+## Example
+
+Let's imagine that you have REST service which implements following call:
+
 ```
+GET https://jsonplaceholder.typicode.com/posts/1 200
 
-#### test / action that triggers the call
-``` bash
-curl http://localhost:3081/api/v1/environment
-```
-
-#### after / tearDown
-``` bash
-curl -X DELETE http://localhost:3081/mock/configure
-```
-
-### code example
-for https://www.npmjs.com/package/request and mocha
-
-#### before
-
-```javascript
- before((client, done) => {
-        request
-            .post('http://localhost:3081/mock/configure/environment/200')
-            .json({"location": {"longitude": 89.582, "latitude": 99.1351},
-                   "zipId": "19900135",
-                   "ssd": {},
-                   "connection": {"wifiStatus": "OK", "radioStatus": "HIGH"}
-                  });
-        ...
-        done();
- });
-```
-
-#### test
-execute your IT-Test
-
-#### after
-```javascript
-    after((client, done) => {
-        request
-            .delete('http://localhost:3081/mock/configure');
-        client.end(() => {
-            done();
-        });
-    });
-```
-
-### mock-n-roll.config.js
-```javascript
-module.exports = {
-    vHost: 'your.funny.domain.dev',
-    baseUrl: '/api/v1',
-    port: 1234,
-    mockedMethods = [
-        'get',
-        'post',
-        'put',
-        'patch',
-        'delete',
-        // 'head'
-    ]
+Response:
+{
+  "userId": 1,
+  "id": 1,
+  "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+  "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
 }
 ```
 
-### TODO
-- [ ] get rid of connect-*
-- [x] cross-env or cli or node standard
-- [ ] config
-- [x] author
-- [ ] lib usage
-- [x] eslint autofix
-- [ ] SwaggerDoc
-- [x] licence
-- [x] mxd-eslint
-- [ ] provide readme on GET /
-- [ ] delay on request level
-- [ ] networkerrors on request level
-- [ ] example for mocha test
-- [ ] npmjs.com - try it in your browser
+And you would like to change response body and status code for it as well.
 
+Something like this:
 
-### upcoming features
-- [ ] default overrule pathes (feature)
-- [ ] proxy recording mode
-- [ ] [ngrok](https://ngrok.com/)
+```
+GET https://jsonplaceholder.typicode.com/posts/1 404
 
-### used/liked
-                * express
-                * https://github.com/icholy/ttygif
-                * https://github.com/swagger-api/swagger-js
-                * https://jbt.github.io/markdown-editor
-
-``` bash
- $ git commit -a  --author="bs <email>" -m "readme"
+Response:
+{
+  "msg": "Requested post wasn't found!"
+}
 ```
 
-License
--------
+As mentioned above you can use **nock** but in some cases you need a proxy that additionaly can change responses.
+
+**Mock-n-roll** works as usual proxy that redirects all not mocked requests to target, and otherwise if mock found it will be used to return appropriate response to caller.
+
+## Usage
+
+First of all you need to define configuration file for your proxy server.
+
+``` javascript
+// mock-n-roll.conf.js - default name for config file
+
+module.exports = {
+  httpPort: 8080,
+  httpsPort: 8443,
+  prefix: '',
+  target: 'https://jsonplaceholder.typicode.com',
+  options: {
+    key: fs.readFileSync(`${__dirname}/ssl.key`, 'utf-8'),
+    cert: fs.readFileSync(`${__dirname}/ssl.cert`, 'utf-8')
+  }
+};
+```
+
+* httpPort - defines port on which HTTP will be served.
+* httpsPort - defines port on which HTTPS will be served.
+* target - host to which requests will be proxied.
+* prefix - prefix which will be used for proxy (for example, proxy only requests under `/api/v1`).
+* options - contains only string values of key and cert for HTTPS, if options not defined, then server will run only HTTP.
+
+By default config file will be searched in current working directory from which node process was started.
+
+Easily you can start server using existed runner:
+
+```
+./bin/mock-n-roll --config ./my-custom-config.js --debug
+```
+
+A little bit about runner options:
+
+* debug - run server with debug messages.
+* config - custom path to config file, if not specified then default `mock-n-roll.conf.js` will be used.
+
+After you should see something like this:
+
+```bash
+$ ./bin/mock-n-roll -c ./example/mock-n-roll.conf.js
+info: Mock-n-Roll started...
+info: HTTP  : 8080
+info: HTTPS : 8443
+info: Target: https://jsonplaceholder.typicode.com
+info: Prefix: [none]
+```
+
+Now you `mock-n-roll` server is started and you can send requests to 'localhost' and it will redirect it to 'jsonplaceholder.typicode.com'.
+
+Use `/mocks` route to configure your mocks.
+
+POST - add new mock, or override existing.
+
+```
+POST http://localhost:8080/mocks 201
+
+Payload:
+{
+  "path": "/posts/1",
+  "code": 404,
+  "body": {
+    "msg": "Requested post wasn't found!"
+  }
+}
+```
+
+GET - returns all mocked routes.
+
+```
+GET http://localhost:8080/mocks 200
+
+Response:
+{
+  "/posts/1": {
+    "body": {
+      "msg": "Requested post was not found!"
+    },
+    "code": 404
+  }
+};
+```
+
+DELETE - delete all existing mocked routes.
+
+```
+DELETE http://localhost:8080/mocks 204
+```
+
+For more convinent usage you can use existing REST client to access mock-n-roll server.
+
+```javascript
+const MocknRollClient = require('mock-n-roll').client;
+
+const client = new MocknRollClient({ host: 'localhost', port: 8080 });
+
+const mock = {
+  path: '/posts/1',
+  code: 404,
+  body: {
+    msg: 'Requested post was not found!'
+  }
+};
+
+client.add(mock, (error, response, body) => {
+    // do something in callback
+});
+
+client.get((error, response, body) => {
+    // do something in callback
+});
+
+client.delete((error, response, body) => {
+    // do something in callback
+});
+```
+
+Also you could look at the tests, it should give you additional information how you could run and use mock-n-roll.
+
+## License
 
 Copyright 2016
 
