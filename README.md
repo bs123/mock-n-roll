@@ -3,6 +3,12 @@
 # mock-n-roll
 configurable rest service system mock
 
+# deprecated 
+use
+mountebank - over the wire test doubles
+http://www.mbtest.org/
+
+
 ## Motivation
 * you don't need mock-n-roll for mocking service layers in your unit tests, use [Sinion](http://sinonjs.org/)
 * you don't need mock-n-roll for mocking http requests in your integration tests, use network interceptors - [nock](https://github.com/node-nock/nock) is cool
