@@ -4,6 +4,10 @@
 
 Configurable server for proxing and mocking REST.
 
+# deprecated 
+use mountebank - over the wire test doubles
+http://www.mbtest.org/
+
 ## Motivation
 
 * You don't need mock-n-roll for mocking service layers in your unit tests, use [Sinion](http://sinonjs.org/).
